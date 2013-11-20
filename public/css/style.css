@@ -1,0 +1,107 @@
+/**
+ *  Project: PFIF寻人平台
+ *  Version: 1.0
+ *  Author: Tysonpan
+ */
+
+/* reset */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { 
+	margin:0;
+	padding:0;
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+.none {
+	display: none;
+}
+fieldset,img { 
+	border:0;
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+	font-style:normal;
+	font-weight:normal;
+}
+ol,ul {
+	list-style:none;
+}
+caption,th {
+	text-align:left;
+}
+h1,h2,h3,h4,h5,h6 {
+	font-size:100%;
+	font-weight:normal;
+}
+q:before,q:after {
+	content:'';
+}
+abbr,acronym { border:0;
+}
+
+ body{font-size: 12px}
+ .wrapper{width: 820px;margin: 0 auto}
+ .footer{text-align: center;color: #545454;line-height: 2em;clear: both;padding-top: 50px}
+ .footer{text-align: center;color: #545454;line-height: 2em}
+ .footer a{color: #545454;text-decoration: none}
+ .footer a:hover{text-decoration: underline;}
+
+/* 首页 */
+ .header{height: 52px;padding:20px 0;border-bottom: #f2f2f2 1px solid;position: relative;}
+ .header .logo{width: 383px;height: 52px;background-image: url(../img/logo.jpg);float: left;}
+ .header .import-data-enter{position: absolute;right: 60px;top:42px;}
+ .header .export-data-enter{position: absolute;right: 0;top:42px;}
+
+ .intro{padding-top: 35px;padding-bottom: 38px}
+ .intro .steps{background-image: url(../img/step.jpg);margin: 0 auto;width: 694px;height: 238px}
+
+ .events{}
+ .events h3{font-size: 22px;color: #545454;border-bottom: #f2f2f2 1px solid;padding-bottom: 15px}
+ .events .events-list{overflow: hidden;margin-top: 20px}
+ .events .events-list li{width: 260px;float: left;margin-right: 20px;margin-bottom: 20px}
+ .events .events-list li.top-event{width: 540px}
+ .events .events-list li.right-event{margin-right: 0}
+ .events .events-list li .event-link{display: block;height: 280px;position: relative;}
+ .events .events-list li .event-link img{display: block;height: 280px}
+ .events .events-list li .event-link .event-title{position:absolute;left:0;bottom:0;background-color: rgba(0,0,0,.3);width: 100%}
+ .events .events-list li .event-link .event-title p{padding:15px;color: #fff;font-size: 18px}
+
+ /* 入口页 */
+ .entrance{}
+ .entrance h3{font-size: 26px;font-weight: bold;text-align: center;margin: 38px 0 30px 0}
+ .entrance .entrance-inner{width: 398px;margin: 0 auto}
+ .entrance .entrance-inner a{width: 180px;height: 180px;text-indent: -999em;cursor: pointer;}
+ .entrance .entrance-inner a.find-person-enter{float: left;background-image: url(../img/find-person-enter.jpg)}
+ .entrance .entrance-inner a.find-person-enter:hover{background-image: url(../img/find-person-enter-hover.jpg)}
+ .entrance .entrance-inner a.provide-person-enter{float: right;background-image: url(../img/provide-person-enter.jpg)}
+ .entrance .entrance-inner a.provide-person-enter:hover{background-image: url(../img/provide-person-enter-hover.jpg)}
+
+ /* 搜索页 */
+ .search-mod{}
+ .search-mod h3{font-size: 26px;font-weight: bold;margin: 30px auto 25px;text-align: center;color: #333}
+ .search-mod .search-form{text-align: center;}
+ .search-mod .search-form .search-input{display: inline-block;width: 320px;height: 32px;margin-right: 10px;line-height: 32px;padding-left: 8px;vertical-align: middle;}
+ .search-mod .search-form .search-button{display: inline-block;width: 80px;height: 32px;background-color: #e83026;border-radius: 2px;text-align: center;line-height: 32px;border: #b11c14 1px solid;color: #fff;vertical-align: middle;cursor: pointer;}
+ 
+ .search-result{margin-top: 50px}
+ .search-result h3{text-align: left;font-size: 22px;color: #545454;padding-bottom: 15px;border-bottom: #f2f2f2 1px solid;}
+ .result-list{padding:10px 0;}
+ .result-list li{padding: 15px;min-height: 100px;overflow: hidden;}
+ .result-list li:hover{background-color: #f2f2f2}
+ .result-list li img{float: left;width: 100px;height: 100px}
+ .result-list li .result-details{float: left;margin-left: 20px}
+ .result-list li .result-details h5{color: #2981d8;font-size: 26	px;padding-bottom: 10px;padding-top: 5px}
+ .result-list li .result-details p{color: #545454;font-size: 14px;line-height: 1.8em}
+
+ /* 提交信息页 */
+ .provide-info{padding-bottom: 30px}
+ .provide-info .title{font-size: 26px;font-weight: bold;margin: 30px auto 25px;text-align: center;color: #333}
+
+ /* 数据导入页 */
+ .import-data{}
+ .import-data h3{font-size: 26px;font-weight: bold;margin: 30px auto 25px;text-align: center;color: #333}
+ .import-data .import-way fieldset{border: #ccc 1px solid;padding: 15px;margin-bottom: 20px}
+ .import-data .import-way fieldset legend{font-size: 16px}
+ .import-data .import-way .import-input{display: inline-block;width: 300px;height: 25px;line-height:25px;vertical-align: middle;padding-left: 10px}
+ .import-data .import-way .import-button{display: inline-block;width: 100px;height: 25px;line-height: 25px;vertical-align: middle;background-color: #2981d8;border-radius: 2px;text-align: center;border: #1865b2 1px solid;color: #fff;margin-left: 15px;cursor: pointer;}
+ .import-data .import-way .import-button:hover{background-color: #1f79d1}

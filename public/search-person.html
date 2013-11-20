@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>  
+  <meta name="keywords" content="Person,Finder,PFIF">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>PFIF寻人平台</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <div class="wrapper">
+    
+    <!-- header -->
+    <div class="header">
+      <a class="logo" href="index.html"></a>
+    </div>
+    
+    <!-- 找人 -->
+    <div class="search-mod">
+        <h3>雅安地震</h3>
+        <div class="search-form">
+          <input type="text" class="search-input" id="search-input" value="">
+          <a class="search-button" id="search-button">找人</a>
+        </div>
+
+    </div>
+
+    <!-- 搜索结果 -->
+    <div class="search-result">
+      <h3>搜索结果</h3>
+      <ul class="result-list" id="res_list">
+        <!-- <li class="result-per">
+          <img src="">
+          <div class="result-details">
+            <h5 class="result-name">XXXXXXXX</h5>
+            <p>性别：女   年龄：33</p>
+            <p>状态：已有人发现，在XXX地方</p>
+          </div>
+        </li>
+        <li class="result-per">
+          <img src="">
+          <div class="result-details">
+            <h5 class="result-name">XXXXXXXX</h5>
+            <p>性别：女   年龄：33</p>
+            <p>状态：已有人发现，在XXX地方</p>
+          </div>
+        </li> -->
+      </ul>
+    </div>  
+
+    <!-- footer -->
+    <div class="footer">
+      <div>
+        <a href="http://www.tencent.com/" target="_blank" rel="nofollow">关于腾讯</a> | <a href="http://www.tencent.com/index_e.shtml" target="_blank" rel="nofollow">About Tencent</a> | <a href="http://www.qq.com/contract.shtml" target="_blank" rel="nofollow">服务协议</a> | <a href="http://www.qq.com/privacy.htm" target="_blank" rel="nofollow">隐私权保护</a> | <a href="http://open.qq.com/" target="_blank" rel="nofollow">开放平台</a> | <a href="http://www.tencentmind.com/" target="_blank" rel="nofollow">广告服务</a> | <a href="http://hr.tencent.com/" target="_blank" rel="nofollow">腾讯招聘</a> | <a href="http://gongyi.qq.com/" target="_blank" rel="nofollow">腾讯公益</a> | <a href="http://service.qq.com/" target="_blank" rel="nofollow">客服中心</a> | <a href="http://www.qq.com/map/" target="_blank" rel="nofollow">网站导航</a>
+      </div>
+      <div class="en">Copyright © 1998 - 2013 Tencent. All Rights Reserved</div>
+      <div>
+        <a href="http://www.tencent.com/" target="_blank" rel="nofollow">腾讯公司</a> <a href="http://www.tencent.com/zh-cn/le/copyrightstatement.shtml" target="_blank" rel="nofollow">版权所有</a>
+      </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="js/jquery-2.0.2.min.js"></script>
+<script type="text/javascript">
+  var cgi = 'http://localhost:9999/';
+
+  var $search_button = $('#search-button');
+  $search_button.click(function(){
+      var search_value = $('#search-input').val();
+      if(search_value == ''){
+        alert('请填写姓名');
+      }else{
+        $.getJSON(cgi+'find?full_name='+search_value,function(result){
+          var o = result.data,arr=[];
+
+          for(var i=0,len=o.length;i<len;i++){
+            var d = o[i];
+            //debugger;
+
+            arr.push('<li class="result-per">'+
+              '<img src="/img/100.jpg">'+
+              '<div class="result-details">'+
+                '<h5 class="result-name">'+ (d.full_name || d['name'])+'</h5>'+
+                '<p>性别：'+(d.sex||'男')+'   年龄：'+(d.age||26)+'</p>'+
+                '<p>状态：已有人发现</p>'+
+                '<p>全球ID：'+(d.person_record_id||129)+'</p>'+
+              '</div>'+
+            '</li>');
+
+            $('#res_list').html(arr.join(''));
+          }
+        });
+      }
+  });
+
+</script>
+</html>
