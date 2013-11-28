@@ -1,3 +1,12 @@
+var user_entry = {
+	'user_id' : '',
+	'access_token' : '',
+	'create_date':'',
+	'last_load_date':'',
+	'status':'',
+	'privacy':'',
+};
+
 var person_entry = {
 	'person_record_id' : '',
 	'entry_date':'',
@@ -54,8 +63,10 @@ var event_entry = {
 	'photo_url':''
 };
 
+exports.user_entry = user_entry;
 exports.person_entry = person_entry;
 exports.note_entry = note_entry;
 exports.event_entry = event_entry;
+
 
 
