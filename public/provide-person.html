@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+<head>  
+  <meta name="keywords" content="Person,Finder,PFIF">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>PFIF寻人平台</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/form-style.css">
+</head>
+
+<body>
+
+  <div class="wrapper">
+
+    <!-- header -->
+    <div class="header">
+      <a class="logo" href="index.html"></a>
+    </div>
+    
+    <!-- 提供信息 -->
+    <div class="provide-info">
+      <h3 class="title">雅安地震</h3>
+      <form method="post" enctype="multipart/form-data" action="/personfinder/2013-uttrakhand-floods/create">
+
+        <input type="hidden" name="role" value="provide">
+        <div class="create" role="form">
+
+          <div class="column left">
+            <div class="fields-table person">
+
+              <h2>记录此人的资料</h2>
+
+              <div class="name section">
+                <h3 class="mandatory">
+                  基本资料
+                </h3>
+               
+                <div class="field">
+                  <span class="label">
+                    <label for="given_name" class="mandatory">
+                      名
+                    </label>
+                  </span>
+                  <span class="value">
+                    <input name="given_name" id="given_name" class="medium-text-input" value="小明" autocomplete="off">
+                  </span>
+                </div>
+
+                <div class="field">
+                  <span class="label">
+                    <label for="family_name" class="mandatory">
+                      姓
+                    </label>
+                  </span>
+                  <span class="value">
+                    <input name="family_name" id="family_name" class="medium-text-input" value="王" autocomplete="off">
+                  </span>
+                </div>
+
+
+
+                <div class="field">
+                  <span class="label">
+                    <label for="alternate__names">
+                      曾用名
+                    </label>
+                  </span>
+                  <span class="value">
+                    <input name="alternate_names" id="alternate_names" class="medium-text-input" value="" autocomplete="off">
+                  </span>
+                </div>
+
+                <div class="end-multi-columns"></div>
+              </div>
+
+              <div class="physical section">
+                <h3>个人特征</h3>
+                <div class="field">
+                  <span class="label">
+                    <label for="sex">性别:</label>
+                  </span>
+                  <span class="value">
+                    <select name="sex" id="sex">
+                      <option value="" selected=""></option>
+                      <option value="female">女</option>
+                      <option value="male">男</option>
+                      <option value="other">其他</option>
+                    </select>
+                  </span>
+                </div>
+                <div class="field">
+                  <span class="label">
+                    <label for="age">年龄:</label>
+                  </span>
+                  <span class="value">
+                    <input name="age" id="age" class="short-text-input" value="20~29" autocomplete="off">
+                  </span>
+                </div>
+                <div class="field">
+                  <div class="value hint">
+                    年龄或范围（如20-30）
+                  </div>
+                </div>
+                <div class="end-multi-columns"></div>
+              </div>
+
+              <div class="address section">
+                <h3>家庭住址
+                </h3>
+                <div class="field">
+                  <span class="label">
+                    <label for="home_street">
+                      街道名
+                    </label>
+                  </span>
+                  <span class="value">
+                    <input name="home_street" id="home_street" class="medium-text-input" value="" autocomplete="off">
+                  </span>
+                </div>
+                
+                <div class="field">
+                  <span class="label">
+
+                    <label for="home_neighborhood">
+                      邻居
+                    </label>
+                  </span>
+                  <span class="value">
+                    <input name="home_neighborhood" id="home_neighborhood" class="medium-text-input" value="" autocomplete="off">
+                  </span>
+                </div>
+                <div class="field">
+                  <span class="label">
+                    <label for="home_city">城市</label>
+                  </span>
+                  <span class="value">
+                    <input name="home_city" id="home_city" class="medium-text-input" value="" autocomplete="off">
+                  </span>
+                </div>
+                <div class="field">
+                  <span class="label">
+                    <label for="home_state">省份
+                    </label>
+                  </span>
+                  <span class="value">
+                    <input name="home_state" id="home_state" class="short-text-input" value="" autocomplete="off">
+                  </span>
+                </div>
+
+                <div class="field">
+                  <span class="label">
+                    <label for="home_postal_code">邮政编号
+                    </label>
+                  </span>
+                  <span class="value">
+                    <input name="home_postal_code" id="home_postal_code" class="short-text-input" value="" autocomplete="off">
+                  </span>
+                </div>
+
+                <div class="end-multi-columns"></div>
+              </div>
+
+              <div class="description section">
+                <h3><label for="description">描述
+                </label></h3>
+            
+                <div class="field">
+                  <textarea name="description" id="description" class="long-text-input" rows="5"></textarea>
+                </div>
+                <div class="end-multi-columns"></div>
+              </div>
+
+
+              <div class="photo section">
+                <h3><label for="photo_url">
+                  照片
+                </label></h3>
+                <div class="hint">
+                  If you have a photo of this person, upload it or enter its URL address.
+                </div>
+                <div class="field" onclick="$('photo_url_radio').checked=true; update_image_input(false);">
+                  <span class="radio">
+                    <input id="photo_url_radio" type="radio" checked="checked" name="photo_input">
+                  </span>
+                  <span class="label">
+                    URL:
+                  </span>
+                  <span class="value">
+                    <input name="photo_url" id="photo_url" class="medium-text-input" value="">
+                  </span>
+                </div>
+                <div class="field" onclick="$('photo_upload_radio').checked=true; update_image_input(false);">
+
+                  <span class="radio">
+                    <input id="photo_upload_radio" type="radio" name="photo_input">
+                  </span>
+                  <span class="label">
+                    上传:
+                  </span>
+                  <span class="value">
+                    <input id="photo_upload" type="file" name="photo" class="medium-text-input" disabled="disabled">
+                  </span>
+
+                </div>
+                <div class="end-multi-columns"></div>
+              </div>
+
+            </div>
+          </div>
+
+
+          <div class="column right">
+            <input type="hidden" name="add_note" value="yes">
+            <input type="hidden" name="id" value="">
+
+
+            <div class="fields-table note" role="complementary">
+              <h2>告诉我们此人的状况
+              </h2>
+
+              <div class="status section">
+                <h3>此人状况
+                </h3>
+                <div class="field">
+                  <select id="status" name="status">
+
+                    <option value="" selected="selected">
+                      未指定
+                    </option>
+
+                    <option value="information_sought">
+                      我在寻找信息
+                    </option>
+
+                    <option value="is_note_author">
+                      我是此人
+                    </option>
+
+                    <option value="believed_alive">
+                      我收到信息说此人还活着
+                    </option>
+
+                    <option value="believed_missing">
+                      我有理由相信此人已失踪
+                    </option>
+
+                  </select>
+                </div>
+                <div class="end-multi-columns"></div>
+              </div>
+
+              <div class="mandatory text section">
+                <h3>留言（要求）
+                </h3>
+                <div class="hint">
+
+                  A message for this person or others seeking this person
+
+                </div>
+                <div class="field">
+                  <textarea name="text" id="text" class="long-text-input" rows="5"></textarea>
+                </div>
+                <div class="end-multi-columns"></div>
+              </div>
+
+              <div class="location section">
+                <h3>最后的已知位置
+                </h3>
+                <div class="hint">
+
+                  Type an address or open the map below and indicate the location by clicking on the map.
+
+                </div>
+                <div class="field">
+                  <textarea name="last_known_location" id="clickable_map_location_field" class="long-text-input" rows="2"></textarea>
+                </div>
+                <div class="end-multi-columns"></div>
+
+                <div class="field map-container">
+                  <div id="clickable_map_show_link">
+                    <a href="#" onclick="toggleClickableMap('clickable_map'); return false;">
+                      打开地图</a>
+                    </div>
+                    <div id="clickable_map_hide_link" style="display: none">
+                      <a href="#" onclick="toggleClickableMap('clickable_map'); return false;">
+                        Hide Map</a>
+                        &nbsp;&nbsp;
+                        <a href="#" id="switch_to_latlng_link" onclick="toggleLatLngAndAddress('clickable_map'); return false;">
+                          Switch to lat/long</a>
+                          <a href="#" id="switch_to_address_link" style="display: none" onclick="toggleLatLngAndAddress('clickable_map'); return false;">
+                            Switch to address</a>
+                          </div>
+                          <div id="clickable_map" class="map" style="display: none"></div>
+                        </div>
+                        <div class="end-multi-columns"></div>
+
+                      </div>
+
+                      <div class="photo section">
+                        <h3><label for="note_photo_url">
+                          照片
+                        </label></h3>
+                        <div class="hint">
+                          To attach a photo to this note, upload it or enter its URL.
+                        </div>
+                        <div class="field" onclick="$('note_photo_url_radio').checked=true; update_image_input(true);">
+                          <span class="radio">
+                            <input id="note_photo_url_radio" type="radio" checked="checked" name="note_photo_input">
+                          </span>
+                          <span class="label">
+                            URL:
+                          </span>
+                          <span class="value">
+                            <input name="note_photo_url" id="note_photo_url" class="medium-text-input" value="">
+                          </span>
+                        </div>
+                        <div class="field" onclick="$('note_photo_upload_radio').checked=true; update_image_input(true);">
+
+                          <span class="radio">
+                            <input id="note_photo_upload_radio" type="radio" name="note_photo_input">
+                          </span>
+                          <span class="label">
+                            上传:
+                          </span>
+                          <span class="value">
+                            <input id="note_photo_upload" type="file" name="note_photo" disabled="disabled">
+                          </span>
+
+                        </div>
+                        <div class="end-multi-columns"></div>
+                      </div>
+
+                      <div class="author_made_contact section">
+                        <h3 class="mandatory">灾难之后，你是否亲自与此人交谈过（要求）
+                        </h3>
+                        <div class="field">
+                          <input type="radio" name="author_made_contact" value="yes" id="author_made_contact_yes" onchange="update_contact()" onclick="update_contact()">
+                          <label class="option" for="author_made_contact_yes">
+                            是
+                          </label>
+                        </div>
+                        <div class="field">
+                          <input type="radio" name="author_made_contact" value="no" id="author_made_contact_no" onchange="update_contact()" onclick="update_contact()" checked="checked">
+                          <label class="option" for="author_made_contact_no">
+                            否
+                          </label>
+                        </div>
+                        <div class="end-multi-columns"></div>
+                      </div>
+                      <div class="contact section" id="contact_row" style="display: none">
+                        <h3>
+                          Missing person's current contact information
+                        </h3>
+                        <div class="hint">
+                          How can this person be reached now?
+                        </div>
+                        <div class="field">
+                          <span class="label">
+                            <label for="phone_of_found_person">
+                              Phone number:
+                            </label>
+                          </span>
+                          <span class="value">
+                            <input name="phone_of_found_person" id="phone_of_found_person" class="medium-text-input" value="">
+                          </span>
+                        </div>
+                        <div class="field">
+                          <span class="label">
+                            <label for="email_of_found_person">
+                              E-mail address:
+                            </label>
+                          </span>
+                          <span class="value">
+                            <input name="email_of_found_person" id="email_of_found_person" class="medium-text-input" value="">
+                          </span>
+                        </div>
+                        <div class="end-multi-columns"></div>
+                      </div>
+
+
+                      <div class="submit">
+                        <a href="javascript:;" onclick="validate_fields()">保存记录</a>
+
+                        <div id="mandatory_field_missing" class="mandatory" style="display: none">
+                          Please fill in all the required fields.
+                        </div>
+                        <div id="status_inconsistent_with_author_made_contact" class="mandatory" style="display: none">
+                          The status you selected indicates that you are this person.  If this is true, please also select 'Yes' to indicate that you have contacted this person.
+                        </div>
+
+
+
+                      </div>
+                    </div>
+
+                  </div>
+
+
+                  <div class="end-multi-columns"></div>
+
+                </div>
+      </form>
+    </div>
+
+    <!-- footer -->
+    <div class="footer">
+      <div>
+        <a href="http://www.tencent.com/" target="_blank" rel="nofollow">关于腾讯</a> | <a href="http://www.tencent.com/index_e.shtml" target="_blank" rel="nofollow">About Tencent</a> | <a href="http://www.qq.com/contract.shtml" target="_blank" rel="nofollow">服务协议</a> | <a href="http://www.qq.com/privacy.htm" target="_blank" rel="nofollow">隐私权保护</a> | <a href="http://open.qq.com/" target="_blank" rel="nofollow">开放平台</a> | <a href="http://www.tencentmind.com/" target="_blank" rel="nofollow">广告服务</a> | <a href="http://hr.tencent.com/" target="_blank" rel="nofollow">腾讯招聘</a> | <a href="http://gongyi.qq.com/" target="_blank" rel="nofollow">腾讯公益</a> | <a href="http://service.qq.com/" target="_blank" rel="nofollow">客服中心</a> | <a href="http://www.qq.com/map/" target="_blank" rel="nofollow">网站导航</a>
+      </div>
+      <div class="en">Copyright © 1998 - 2013 Tencent. All Rights Reserved</div>
+      <div>
+        <a href="http://www.tencent.com/" target="_blank" rel="nofollow">腾讯公司</a> <a href="http://www.tencent.com/zh-cn/le/copyrightstatement.shtml" target="_blank" rel="nofollow">版权所有</a>
+      </div>
+    </div>
+
+  </div>  
+
+</body>
+
+          <script type="text/javascript" src="js/jquery-2.0.2.min.js"></script>
+          <script type="text/javascript">
+
+          var cgi = 'http://localhost:9998/';
+          var validate_fields  = function(){
+                $.ajax({    
+                  url:cgi+'add',  
+                  data:{    
+                   "given_name" : $("#given_name").val(),    
+                   "family_name" : $("#family_name").val(),
+                   "full_name" :　($("#family_name").val() + $("#given_name").val()),
+                   "alternate_names" : $("#alternate_names").val(),
+                   "sex" : $("#sex").val(),
+                   "age" : $("#age").val(),
+                   "home_street" : $("#home_street").val(),
+                   "home_neighborhood" : $("#home_neighborhood").val(),
+                   "home_city" : $("#home_city").val(),
+                   "home_state" : $("#home_state").val(),
+                   "home_postal_code" : $("#home_postal_code").val(),
+                   "description" : $("#description").val(),
+                   "status" : $("#status").val(),
+                   "text" : $("#text").val(),
+                   "last_known_location" : $("#clickable_map_location_field").val()
+                 },    
+                 type:'post',    
+                 dataType:'json',    
+                 success:function(data) {
+                  data = JSON.parse(data);
+                  if(data.msg == "suc" ){      
+                    alert("添加成功");    
+                  }else{    
+                    alert(data.msg);    
+                  }    
+                },    
+                error : function() {    
+                  // view("异常！");    
+                  alert("异常！");    
+                }    
+                });  
+            };
+          //});
+
+          </script>
+          </html>
