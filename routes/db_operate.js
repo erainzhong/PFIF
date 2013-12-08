@@ -9,9 +9,15 @@ var db_sql_hash  = {
 	updateUser : "update user set access_token=<%=access_token%>,last_load_date=<%=last_load_date%>,privacy=<%=privacy%>,status=<%status%> where user_id=<%=user_id%>",
 	addUser : "insert into user(user_id,access_token,create_date,last_load_date,status,privacy) values(<%=user_id%>,<%=access_token%>,<%=create_date%>,<%=last_load_date%>,<%=status%>,<%=privacy%>) where not exists user_id=<%=user_id%>",
 
-	selectPerson : "select * from person where full_name=<%=full_name%>",
+	selectPerson : "select * from person where full_name like <%=full_name%>",
 	updatePerson : "",
-	addPerson : "insert into person(person_record_id,entry_date,expiry_date,author_name,author_email,author_phone,source_name,source_date,source_url,full_name,given_name,family_name,alternate_names,profile_urls,sex,date_of_birth,age,home_street,home_neighborhood,home_city,home_state,home_postal_code,home_country,photo_url,profile_urls,event_id,description) values(<%=person_record_id %>,<%=entry_date %>,<%=expiry_date%>,<%=author_name%>,<%=author_email%>,<%=author_phone%>,<%=source_name%>,<%=source_date%>,<%=source_url%>,<%=full_name%>,<%=given_name%>,<%=family_name%>,<%=alternate_names%>,<%=profile_urls%>,<%=sex%>,<%=date_of_birth%>,<%=age%>,<%=home_street%>,<%=home_neighborhood%>,<%=home_city%>,<%=home_state%>,<%=home_postal_code%>,<%=home_country%>,<%=photo_url%>,<%=profile_urls%>,<%=event_id%>,<%=description%>)"
+	addPerson : "insert into person(person_record_id,entry_date,expiry_date,author_name,author_email,author_phone,source_name,source_date,source_url,full_name,given_name,family_name,alternate_names,profile_urls,sex,date_of_birth,age,home_street,home_neighborhood,home_city,home_state,home_postal_code,home_country,photo_url,profile_urls,event_id,description) values(<%=person_record_id %>,<%=entry_date %>,<%=expiry_date%>,<%=author_name%>,<%=author_email%>,<%=author_phone%>,<%=source_name%>,<%=source_date%>,<%=source_url%>,<%=full_name%>,<%=given_name%>,<%=family_name%>,<%=alternate_names%>,<%=profile_urls%>,<%=sex%>,<%=date_of_birth%>,<%=age%>,<%=home_street%>,<%=home_neighborhood%>,<%=home_city%>,<%=home_state%>,<%=home_postal_code%>,<%=home_country%>,<%=photo_url%>,<%=profile_urls%>,<%=event_id%>,<%=description%>)",
+
+	selectNote : "select * from note where person_record_id=<%=person_record_id%>",
+	updateNote :  "",
+	addNote : "insert into note(note_record_id,person_record_id,linked_person_record_id,entry_date,author_name,author_email,author_phone,source_date,status,author_made_contact,email_of_found_person,phone_of_found_person,last_known_location,text,photo_url) values(<%=note_record_id%>,<%=person_record_id%>,<%=linked_person_record_id%>,<%=entry_date%>,<%=author_name%>,<%=author_email%>,<%=author_phone%>,<%=source_date%>,<%=status%>,<%=author_made_contact%>,<%=email_of_found_person%>,<%=phone_of_found_person%>,<%=last_known_location%>,<%=text%>,<%=photo_url%>)",
+
+	addRecord : "insert into note(user_id,record_id,create_date,record_type) values(<%=user_id%>,<%=record_id%>,<%=create_date%>,<%=record_type%>)"
 
 };
 
@@ -28,6 +34,18 @@ var escapeSQL = function(data){
 		data[i] = mysql.escape(data[i],true,'local');
 	}
 	return data;
+}
+
+//格式为 YYYY-MM-DD HH:MM:SS
+var getNowDate = function(){
+	var _d = new Date();
+	var dateFormat = require('dateformat');
+	return dateFormat(_d, "yyyy-mm-dd HH:MM:ss");
+}
+
+//生成recordData
+var getRecordData = function(type){
+
 }
 
 var db_operate = {
@@ -51,6 +69,34 @@ var db_operate = {
 		}else if(opts.table == "person"){
 			var data = escapeSQL(params.data);
 			db.add(parseSQL("addPerson",data),{
+				cb : function(d){
+					opts.cb(d);
+				},
+				ecb : function(){
+					opts.ecb();
+				}
+			});
+			var recordData = 
+			db.add(parseSQL("addRecord",recordData),{
+				cb : function(d){
+					opts.cb(d);
+				},
+				ecb : function(){
+					opts.ecb();
+				}
+			});
+		}else if(opts.table == "note"){
+			var data = escapeSQL(params.data);
+			db.add(parseSQL("addNote",data),{
+				cb : function(d){
+					opts.cb(d);
+				},
+				ecb : function(){
+					opts.ecb();
+				}
+			});
+			var recordData = 
+			db.add(parseSQL("addRecord",recordData),{
 				cb : function(d){
 					opts.cb(d);
 				},
