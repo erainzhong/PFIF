@@ -20,7 +20,7 @@
     <!-- 提供信息 -->
     <div class="provide-info">
       <h3 class="title">雅安地震</h3>
-      <form method="post" enctype="multipart/form-data" action="/personfinder/2013-uttrakhand-floods/create">
+      <form id="form-main" method="post" enctype="multipart/form-data" action="/cgi/add">
 
         <input type="hidden" name="role" value="provide">
         <div class="create" role="form">
@@ -34,26 +34,37 @@
                 <h3 class="mandatory">
                   基本资料
                 </h3>
-               
+
                 <div class="field">
+                  <span class="label">
+                    <label for="fullanme" class="mandatory">
+                      姓名
+                    </label>
+                  </span>
+                  <span class="value">
+                    <input id="fullanme" class="medium-text-input" value="" autocomplete="off">
+                  </span>
+                </div>
+               
+                <div class="field" style="display:none">
                   <span class="label">
                     <label for="given_name" class="mandatory">
                       名
                     </label>
                   </span>
                   <span class="value">
-                    <input name="given_name" id="given_name" class="medium-text-input" value="小明" autocomplete="off">
+                    <input name="given_name" id="given_name" class="medium-text-input" value="" autocomplete="off">
                   </span>
                 </div>
 
-                <div class="field">
+                <div class="field" style="display:none">
                   <span class="label">
                     <label for="family_name" class="mandatory">
                       姓
                     </label>
                   </span>
                   <span class="value">
-                    <input name="family_name" id="family_name" class="medium-text-input" value="王" autocomplete="off">
+                    <input name="family_name" id="family_name" class="medium-text-input" value="" autocomplete="off">
                   </span>
                 </div>
 
@@ -80,12 +91,8 @@
                     <label for="sex">性别:</label>
                   </span>
                   <span class="value">
-                    <select name="sex" id="sex">
-                      <option value="" selected=""></option>
-                      <option value="female">女</option>
-                      <option value="male">男</option>
-                      <option value="other">其他</option>
-                    </select>
+                    <input id="radio-female" type="radio" name="sex" value="female"><label for="radio-female">女</label>
+                    <input id="radio-male" type="radio" name="sex" value="male"><label for="radio-male">男</label>
                   </span>
                 </div>
                 <div class="field">
@@ -93,7 +100,7 @@
                     <label for="age">年龄:</label>
                   </span>
                   <span class="value">
-                    <input name="age" id="age" class="short-text-input" value="20~29" autocomplete="off">
+                    <input name="age" id="age" class="short-text-input" value="" autocomplete="off">
                   </span>
                 </div>
                 <div class="field">
@@ -178,7 +185,7 @@
                 <div class="hint">
                   If you have a photo of this person, upload it or enter its URL address.
                 </div>
-                <div class="field" onclick="$('photo_url_radio').checked=true; update_image_input(false);">
+                <div class="field" >
                   <span class="radio">
                     <input id="photo_url_radio" type="radio" checked="checked" name="photo_input">
                   </span>
@@ -189,7 +196,7 @@
                     <input name="photo_url" id="photo_url" class="medium-text-input" value="">
                   </span>
                 </div>
-                <div class="field" onclick="$('photo_upload_radio').checked=true; update_image_input(false);">
+                <div class="field" >
 
                   <span class="radio">
                     <input id="photo_upload_radio" type="radio" name="photo_input">
@@ -198,7 +205,7 @@
                     上传:
                   </span>
                   <span class="value">
-                    <input id="photo_upload" type="file" name="photo" class="medium-text-input" disabled="disabled">
+                    <iframe id="photo_upload_page" name="photo_upload_page" src="./photo-upload.html"></iframe>
                   </span>
 
                 </div>
@@ -278,16 +285,16 @@
 
                 <div class="field map-container">
                   <div id="clickable_map_show_link">
-                    <a href="#" onclick="toggleClickableMap('clickable_map'); return false;">
+                    <a href="#" >
                       打开地图</a>
                     </div>
                     <div id="clickable_map_hide_link" style="display: none">
-                      <a href="#" onclick="toggleClickableMap('clickable_map'); return false;">
+                      <a href="#" >
                         Hide Map</a>
                         &nbsp;&nbsp;
-                        <a href="#" id="switch_to_latlng_link" onclick="toggleLatLngAndAddress('clickable_map'); return false;">
+                        <a href="#" id="switch_to_latlng_link" >
                           Switch to lat/long</a>
-                          <a href="#" id="switch_to_address_link" style="display: none" onclick="toggleLatLngAndAddress('clickable_map'); return false;">
+                          <a href="#" id="switch_to_address_link" style="display: none" >
                             Switch to address</a>
                           </div>
                           <div id="clickable_map" class="map" style="display: none"></div>
@@ -303,7 +310,7 @@
                         <div class="hint">
                           To attach a photo to this note, upload it or enter its URL.
                         </div>
-                        <div class="field" onclick="$('note_photo_url_radio').checked=true; update_image_input(true);">
+                        <div class="field" >
                           <span class="radio">
                             <input id="note_photo_url_radio" type="radio" checked="checked" name="note_photo_input">
                           </span>
@@ -314,7 +321,7 @@
                             <input name="note_photo_url" id="note_photo_url" class="medium-text-input" value="">
                           </span>
                         </div>
-                        <div class="field" onclick="$('note_photo_upload_radio').checked=true; update_image_input(true);">
+                        <div class="field" >
 
                           <span class="radio">
                             <input id="note_photo_upload_radio" type="radio" name="note_photo_input">
@@ -334,13 +341,13 @@
                         <h3 class="mandatory">灾难之后，你是否亲自与此人交谈过（要求）
                         </h3>
                         <div class="field">
-                          <input type="radio" name="author_made_contact" value="yes" id="author_made_contact_yes" onchange="update_contact()" onclick="update_contact()">
+                          <input type="radio" name="author_made_contact" value="yes" id="author_made_contact_yes"  >
                           <label class="option" for="author_made_contact_yes">
                             是
                           </label>
                         </div>
                         <div class="field">
-                          <input type="radio" name="author_made_contact" value="no" id="author_made_contact_no" onchange="update_contact()" onclick="update_contact()" checked="checked">
+                          <input type="radio" name="author_made_contact" value="no" id="author_made_contact_no"   checked="checked">
                           <label class="option" for="author_made_contact_no">
                             否
                           </label>
@@ -378,19 +385,7 @@
                       </div>
 
 
-                      <div class="submit">
-                        <a href="javascript:;" onclick="validate_fields()">保存记录</a>
 
-                        <div id="mandatory_field_missing" class="mandatory" style="display: none">
-                          Please fill in all the required fields.
-                        </div>
-                        <div id="status_inconsistent_with_author_made_contact" class="mandatory" style="display: none">
-                          The status you selected indicates that you are this person.  If this is true, please also select 'Yes' to indicate that you have contacted this person.
-                        </div>
-
-
-
-                      </div>
                     </div>
 
                   </div>
@@ -398,6 +393,16 @@
 
                   <div class="end-multi-columns"></div>
 
+                </div>
+                <div class="submit">
+                  <button type="submit">保存记录</button>
+
+                  <div id="mandatory_field_missing" class="mandatory" style="display: none">
+                    Please fill in all the required fields.
+                  </div>
+                  <div id="status_inconsistent_with_author_made_contact" class="mandatory" style="display: none">
+                    The status you selected indicates that you are this person.  If this is true, please also select 'Yes' to indicate that you have contacted this person.
+                  </div>
                 </div>
       </form>
     </div>
@@ -417,47 +422,65 @@
 
 </body>
 
-          <script type="text/javascript" src="js/jquery-2.0.2.min.js"></script>
-          <script type="text/javascript">
+<script type="text/javascript" src="js/jquery-2.0.2.min.js"></script>
+<script type="text/javascript">
+    var validate_fields = function () {
+        var $form = $('#form-main');
+        var cgi = $form.attr('action');
+        var $fullanme = $('#fullanme');
+        var fullanme = $fullanme.val();
+        var $family_name = $('#family_name');
+        var $given_name = $('#given_name');
+        var family_name, given_name;
+        var family_names = '宇文|尉迟|延陵|羊舌|羊角|乐正|诸葛|颛孙|仲孙|仲长|长孙|钟离|宗政|左丘|主父|宰父|子书|子车|子桑|百里|北堂|北野|哥舒|谷梁|闻人|王孙|王官|王叔|巫马|微生|淳于|单于|成公|叱干|叱利|褚师|端木|东方|东郭|东宫|东野|东里|东门|第二|第五|公祖|公玉|公西|公孟|公伯|公仲|公孙|公广|公上|公冶|公羊|公良|公户|公仪|公山|公门|公坚|公乘|欧阳|濮阳|青阳|漆雕|壤驷|上官|司徒|司马|司空|司寇|士孙|申屠|叔孙|叔仲|侍其|令狐|梁丘|闾丘|刘傅|慕容|万俟|谷利|高堂|南宫|南门|南荣|南野|女娲|纳兰|澹台|拓跋|太史|太叔|太公|秃发|夏侯|西门|鲜于|轩辕|相里|皇甫|赫连|呼延|胡母|亓官|夹谷|即墨|独孤|段干|达奚';
 
-          var cgi = 'http://localhost:9998/';
-          var validate_fields  = function(){
-                $.ajax({    
-                  url:cgi+'add',  
-                  data:{    
-                   "given_name" : $("#given_name").val(),    
-                   "family_name" : $("#family_name").val(),
-                   "full_name" :　($("#family_name").val() + $("#given_name").val()),
-                   "alternate_names" : $("#alternate_names").val(),
-                   "sex" : $("#sex").val(),
-                   "age" : $("#age").val(),
-                   "home_street" : $("#home_street").val(),
-                   "home_neighborhood" : $("#home_neighborhood").val(),
-                   "home_city" : $("#home_city").val(),
-                   "home_state" : $("#home_state").val(),
-                   "home_postal_code" : $("#home_postal_code").val(),
-                   "description" : $("#description").val(),
-                   "status" : $("#status").val(),
-                   "text" : $("#text").val(),
-                   "last_known_location" : $("#clickable_map_location_field").val()
-                 },    
-                 type:'post',    
-                 dataType:'json',    
-                 success:function(data) {
-                  data = JSON.parse(data);
-                  if(data.msg == "suc" ){      
-                    alert("添加成功");    
-                  }else{    
-                    alert(data.msg);    
-                  }    
-                },    
-                error : function() {    
-                  // view("异常！");    
-                  alert("异常！");    
-                }    
-                });  
-            };
-          //});
+        if (family_names.indexOf(fullanme.slice(0, 2)) !== -1) {
+            family_name = fullanme.slice(0, 2);
+            given_name = fullanme.slice(2);
+        } else {
+            family_name = fullanme.slice(0, 1);
+            given_name = fullanme.slice(1);
+        }
 
-          </script>
-          </html>
+        $family_name.val(family_name);
+        $given_name.val(given_name);
+
+        var formData = $form.serializeArray();
+        var data = {};
+
+        $.each(formData, function (index, value) {
+            data[value.name] = value.value;
+        });
+
+        var $submit = $form.find('[type=submit]');
+        var submitButtonText = $submit.html();
+        $submit.html('提交中..').attr('disabled', true);
+
+        $.ajax({
+            url: cgi,
+            data: data,
+            type: 'post',
+            dataType: 'json',
+            success: function (data) {
+                if (data.code === 0) {
+                    alert("添加成功");
+                    $submit.html('已经保存');
+                } else {
+                    alert(data.msg);
+                    $submit.html(submitButtonText).removeAttr('disabled');
+                }
+            },
+            error: function () {
+                // view("异常！");    
+                alert("网络错误，请重试");
+                $submit.html(submitButtonText).removeAttr('disabled');
+            }
+        });
+    };
+
+    $('#form-main').on('submit', function () {
+        validate_fields();
+        return false;
+    });
+</script>
+</html>

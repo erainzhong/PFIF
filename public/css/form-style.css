@@ -787,3 +787,11 @@ table.counts td {
 .import .stats .errors {
   color: red;
 }
+
+#photo_upload_page {
+  overflow: hidden;
+  width: 200px;
+  height: 19px;
+  vertical-align: middle;
+  border: 0 none;
+}
