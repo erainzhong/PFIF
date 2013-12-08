@@ -8,7 +8,7 @@ var addPerson = function(req, res){
 		person_entry[i] = req.body[i]
 	}
 
-	LI.addPerson(person_entry,{
+	LI.addNewPerson(person_entry,{
 		table : "person",
 		cb : function(d){
 			res.json(LI.sucJSON(0,d));

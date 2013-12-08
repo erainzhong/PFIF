@@ -75,15 +75,6 @@ var db_operate = {
 					opts.ecb();
 				}
 			});
-			var recordData = 
-			db.add(parseSQL("addRecord",recordData),{
-				cb : function(d){
-					opts.cb(d);
-				},
-				ecb : function(){
-					opts.ecb();
-				}
-			});
 		}else if(opts.table == "note"){
 			var data = escapeSQL(params.data);
 			db.add(parseSQL("addNote",data),{
@@ -94,14 +85,10 @@ var db_operate = {
 					opts.ecb();
 				}
 			});
-			var recordData = 
-			db.add(parseSQL("addRecord",recordData),{
-				cb : function(d){
-					opts.cb(d);
-				},
-				ecb : function(){
-					opts.ecb();
-				}
+		}else if(opts.table == "record"){
+			var data = escapeSQL(params.data);
+			db.add(parseSQL("addRecord",data),{
+				
 			});
 		}
 	},

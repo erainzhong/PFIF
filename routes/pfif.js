@@ -7,6 +7,13 @@ var user_entry = {
 	'privacy':'',
 };
 
+var record_entry = {
+	'user_id' : '',
+	'record_id' : '',
+	'create_date' : '',
+	'record_type' : ''
+};
+
 var person_entry = {
 	'person_record_id' : '',
 	'entry_date':'',
@@ -64,9 +71,7 @@ var event_entry = {
 };
 
 exports.user_entry = user_entry;
+exports.record_entry = record_entry;
 exports.person_entry = person_entry;
 exports.note_entry = note_entry;
 exports.event_entry = event_entry;
-
-
-

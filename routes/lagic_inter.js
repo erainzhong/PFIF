@@ -1,5 +1,8 @@
 //后台逻辑接口层，主要提供公共方法。
 
+//当前请求用户的实例
+var user = req.session.user || {};
+
 var LI = {};
 
 var pfif = require('./pfif');
@@ -46,7 +49,7 @@ LI = {
 		var dateFormat = require('dateformat');
 		return dateFormat(_d, "yyyy-mm-dd HH:MM:ss");
 	},
-	addNewUser : function(user,opts){
+	addNewUser : function(user){
 		var _d = LI.getNowDate(),
 			user_entry = US.clone(pfif.user_entry);
 		user.user_id = user.openId;
@@ -72,6 +75,7 @@ LI = {
 			person_entry[i] = person[i];
 		}
 		person_entry.person_record_id = key_domain_person + (+new Date());
+		LI.addRecord(person_entry,"person");
 		dbOpr.add({
 			data : person_entry
 		},{
@@ -81,7 +85,7 @@ LI = {
 
 	},
 	addNewNote : function(note){
-
+		//todo
 	},
 
 	findPerson : function(person,opts){
@@ -92,6 +96,30 @@ LI = {
 			cb : opts.cb,
 			ecb : opts.ecb
 		})
+	},
+
+	addRecord : function(recordData,type){
+		var _d = LI.getNowDate(),
+			record_entry = US.clone(pfif.record_entry);
+		if(!user.openId){
+			return;
+		}else{
+			record_entry.user_id = user.openId;
+		}
+		if(type == "person"){
+			record_entry.record_id = recordData.person_record_id;
+		}else if(type == "note"){
+			record_entry.record_id = recordData.note_record_id;
+		}
+		record_entry.create_date = _d;
+		record_entry.record_type = type
+		dbOpr.add({
+			data : record_entry
+		},{
+			table : "record",
+			cb : function(){},
+			ecb : function(){}
+		});
 	}
 
 };
