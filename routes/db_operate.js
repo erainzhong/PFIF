@@ -30,7 +30,6 @@ var parseSQL = function(type,data){
 //防SQL注入
 var escapeSQL = function(data){
 	for(var i in data){
-		if()
 		data[i] = mysql.escape(data[i],true,'local');
 	}
 	return data;
