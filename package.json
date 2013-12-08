@@ -18,7 +18,8 @@
         "cookie-signature": "1.0.1",
         "underscore": "~1.5.2",
         "redis": "~0.9.1",
-        "connect-redis": "~1.4.6"
+        "connect-redis": "~1.4.6",
+        "gm" : "~1.14.0"
     },
     "license": "BSD"
 }

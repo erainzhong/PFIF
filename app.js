@@ -4,6 +4,7 @@ var find = require('./routes/cgi/find');
 var add = require('./routes/cgi/add');
 var login = require('./routes/cgi/login');
 var exit = require('./routes/cgi/exit');
+var upload = require('./routes/cgi/upload');
 var http = require('http');
 var path = require('path');
 var redis = require('redis');
@@ -31,6 +32,12 @@ app.use(express.session({
 	cookie : {maxAge : 1000*60*60*24*7},
 	secret : 'pfif'
 }));
+app.use(express.bodyParser({
+	uploadDir: "source/imgcache/",
+	keepExtensions: true,
+	limit: 10000000, // 10M limit
+	defer: true  //enable event            
+}));
 app.use(function(req,res,next){
 	//todo 有些请求可能无需登录态，这里就不劫持了
 	var url = req.originalUrl;
@@ -46,7 +53,7 @@ app.use(function(req,res,next){
 	}
 });
 app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));//网站静态资源
 
 // development only
 if ('development' == app.get('env')) {
@@ -59,6 +66,7 @@ app.get('/debug', index.index);
 app.get('/cgi/find', find.findPerson);
 app.post('/cgi/add',add.addPerson);
 app.get('/cgi/exit', exit.exit);
+app.post('/cgi/upload', upload.uploadImg);
 
 http.createServer(app).listen(app.get('port'), function(){
 	console.log('Express server listening on port ' + app.get('port'));
