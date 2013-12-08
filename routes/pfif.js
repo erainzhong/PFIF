@@ -28,7 +28,7 @@ var person_entry = {
 	'given_name':'',
 	'family_name':'',
 	'alternate_names':'',
-	'profile_urls':'',
+	'description' : '',
 	'sex':'',
 	'date_of_birth':'',//精度可调
 	'age':'',//age可以是个范围
@@ -40,8 +40,7 @@ var person_entry = {
 	'home_country':'',
 	'photo_url':'',
 	'profile_urls':'',//个人照片，用|分割
-	'event_id':'',//隶属事件
-	'description':''
+	'event_id':''//隶属事件
 };
 
 var note_entry = {

@@ -1,7 +1,8 @@
 //后台逻辑接口层，主要提供公共方法。
 
 //当前请求用户的实例
-var user = req.session.user || {};
+var user = global.req && global.req.session && global.req.session.user || {};
+
 
 var LI = {};
 
@@ -59,20 +60,22 @@ LI = {
 		user.status = "";
 		user.privacy = user.privacy;
 		for(var i in user_entry){
-			user_entry[i] = user[i];
+			user_entry[i] = (typeof user[i] == "undefined" ? "" : user[i]);
 		}
 		dbOpr.add({
 			data:user_entry
 		},{
 			table : "user",
-			cb : function(d){console.log(d)}
+			cb : function(d){
+				console.log(d)
+			}
 		})
 	},
 	addNewPerson : function(person){
 		var _d = LI.getNowDate(),
 			person_entry = US.clone(pfif.person_entry);
 		for(var i in person){
-			person_entry[i] = person[i];
+			person_entry[i] = (typeof person[i] == "undefined" ? "" : person[i]);
 		}
 		person_entry.person_record_id = key_domain_person + (+new Date());
 		LI.addRecord(person_entry,"person");
@@ -80,7 +83,9 @@ LI = {
 			data : person_entry
 		},{
 			table : "person",
-			cb : function(d){}
+			cb : function(d){
+				global.res.json(LI.sucJSON(0));
+			}
 		});
 
 	},
@@ -117,8 +122,12 @@ LI = {
 			data : record_entry
 		},{
 			table : "record",
-			cb : function(){},
-			ecb : function(){}
+			cb : function(d){
+
+			},
+			ecb : function(){
+
+			}
 		});
 	}
 

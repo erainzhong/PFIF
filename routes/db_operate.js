@@ -11,7 +11,7 @@ var db_sql_hash  = {
 
 	selectPerson : "select * from person where full_name like <%=full_name%>",
 	updatePerson : "",
-	addPerson : "insert into person(person_record_id,entry_date,expiry_date,author_name,author_email,author_phone,source_name,source_date,source_url,full_name,given_name,family_name,alternate_names,profile_urls,sex,date_of_birth,age,home_street,home_neighborhood,home_city,home_state,home_postal_code,home_country,photo_url,profile_urls,event_id,description) values(<%=person_record_id %>,<%=entry_date %>,<%=expiry_date%>,<%=author_name%>,<%=author_email%>,<%=author_phone%>,<%=source_name%>,<%=source_date%>,<%=source_url%>,<%=full_name%>,<%=given_name%>,<%=family_name%>,<%=alternate_names%>,<%=profile_urls%>,<%=sex%>,<%=date_of_birth%>,<%=age%>,<%=home_street%>,<%=home_neighborhood%>,<%=home_city%>,<%=home_state%>,<%=home_postal_code%>,<%=home_country%>,<%=photo_url%>,<%=profile_urls%>,<%=event_id%>,<%=description%>)",
+	addPerson : "insert into person(person_record_id,entry_date,expiry_date,author_name,author_email,author_phone,source_name,source_date,source_url,full_name,given_name,family_name,alternate_names,description,sex,date_of_birth,age,home_street,home_neighborhood,home_city,home_state,home_postal_code,home_country,photo_url,profile_urls,event_id) values(<%=person_record_id %>,<%=entry_date %>,<%=expiry_date%>,<%=author_name%>,<%=author_email%>,<%=author_phone%>,<%=source_name%>,<%=source_date%>,<%=source_url%>,<%=full_name%>,<%=given_name%>,<%=family_name%>,<%=alternate_names%>,<%=description%>,<%=sex%>,<%=date_of_birth%>,<%=age%>,<%=home_street%>,<%=home_neighborhood%>,<%=home_city%>,<%=home_state%>,<%=home_postal_code%>,<%=home_country%>,<%=photo_url%>,<%=profile_urls%>,<%=event_id%>)",
 
 	selectNote : "select * from note where person_record_id=<%=person_record_id%>",
 	updateNote :  "",
@@ -42,14 +42,11 @@ var getNowDate = function(){
 	return dateFormat(_d, "yyyy-mm-dd HH:MM:ss");
 }
 
-//生成recordData
-var getRecordData = function(type){
-
-}
-
 var db_operate = {
 	//添加信息
 	add : function(params,opts){
+		opts.cb = opts.cb || function(){};
+		opts.ecb = opts.ecb || function(){};
 		if(opts.table == "user"){//用户表操作
 			var data = escapeSQL(params.data);
 			db.get(parseSQL("selectUser",data),{

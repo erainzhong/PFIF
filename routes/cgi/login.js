@@ -25,6 +25,8 @@ var isLogin = function(req,res,scb,ecb){
 	var sessionID = req.sessionID;
 	var openId = req.cookies.openId;
 	var _islogin = false;
+	global.req = req;
+	global.res = res;
 	store.get(sessionID,function(err,data){
 		if(data && data.user && data.user.sessionID == sessionID && data.user.openId == openId){
 			_islogin = true;
